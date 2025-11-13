@@ -1,0 +1,76 @@
+<div class="container">
+  <h2 class="text-center my-4">Lista</h2>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titulo</th>
+        <th>Autor</th>
+        <th>Año</th>
+        <th>Genero</th>
+        <th>Paginas</th>
+        <th>Descripcion</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of object" class="table-active">
+        <td>{{ item.id }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.author }}</td>
+        <td>{{ item.year }}</td>
+        <td>{{ item.genre }}</td>
+        <td>{{ item.pages }}</td>   
+        <td>{{ item.description }}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-warning btn-sm me-2" (click)="openEditModal(item)">Editar</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeObject(item.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td>Campos:</td>
+        <td><input class="form-control" type="text" [(ngModel)]="newObject.title" placeholder="Titulo"></td>
+        <td><input class="form-control" type="text" [(ngModel)]="newObject.author" placeholder="Autor"></td>
+        <td><input class="form-control" type="number" [(ngModel)]="newObject.year" placeholder="Año"></td>
+        <td><input class="form-control" type="text" [(ngModel)]="newObject.genre" placeholder="Genero"></td>
+        <td><input class="form-control" type="number" [(ngModel)]="newObject.pages" placeholder="Paginas"></td>
+        <td><input class="form-control" type="text" [(ngModel)]="newObject.description" placeholder="Descripcion"></td>
+        <td class="text-center">
+          <button type="button" class="btn btn-primary btn-sm" (click)="saveObject()">Agregar</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="modal fade" #modalEdit tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Libro</h5>
+          <button type="button" class="btn-close" (click)="closeEditModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <input class="form-control mb-2" type="text" [(ngModel)]="selectedObject.title" placeholder="Titulo">
+          <input class="form-control mb-2" type="email" [(ngModel)]="selectedObject.author" placeholder="Autor">
+          <input class="form-control mb-2" type="text" [(ngModel)]="selectedObject.year" placeholder="Año">
+          <input class="form-control mb-2" type="text" [(ngModel)]="selectedObject.genre" placeholder="Genero">
+          <input class="form-control mb-2" type="text" [(ngModel)]="selectedObject.pages" placeholder="Paginas">
+          <input class="form-control mb-2" type="text" [(ngModel)]="selectedObject.description" placeholder="Descripcion">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
+          <button type="button" class="btn btn-warning" (click)="modifyObject()">Guardar Cambios</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
